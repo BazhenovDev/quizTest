@@ -1,0 +1,25 @@
+.main {
+  padding-top: 190px;
+  padding-bottom: 231px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__content {
+    max-width: 588px;
+
+
+    &-description {
+      font-size: 20px;
+      max-width: 486px;
+      margin-top: 40px;
+      line-height: 24px;
+    }
+
+  }
+  &__action {
+    margin-top: 60px;
+  }
+}
