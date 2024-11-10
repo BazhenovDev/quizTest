@@ -14,7 +14,7 @@
                 name: 'lastName',
                 id: 'last-name',
                 element: null,
-                regex: /^[А-Я][а-я]+\s*$/,
+                regex: /^[А-ЯЁ][а-яё]+\s*$/,
                 valid: false,
             },
             {
@@ -30,10 +30,8 @@
             this.fields.forEach(item => {
                 item.element = document.getElementById(item.id);
                 item.element.onchange = function () {
-                    // console.log(that);
-                    // console.log(item);
-                    // console.log(this);
                     that.validateField.call(that, item, this);
+                    sessionStorage.setItem(item.name, item.element.value)
                 }
             });
 
@@ -65,7 +63,6 @@
            } else {
                this.processElement.setAttribute('disabled', 'disabled');
            }
-           // console.log(isValid)
            return isValid
         },
         processForm() {

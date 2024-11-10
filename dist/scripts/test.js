@@ -165,6 +165,8 @@
                     questionId: activeQuestion.id,
                     chosenAnswerId: chosenAnswerId,
                 });
+                sessionStorage.setItem(`questionAnswer-${activeQuestion.id}`, chosenAnswerId);
+
             }
 
             if (action === 'next' || action === 'pass') {
@@ -190,7 +192,6 @@
                 }
             });
 
-
             this.showQuestion();
         },
         complete() {
@@ -209,6 +210,7 @@
                 results: this.userResult,
             }));
 
+            const that = this;
             if (xhr.status === 200 && xhr.responseText) {
                 let result = null;
                 try {
@@ -217,7 +219,9 @@
                     location.href = 'index.html';
                 }
                 if (result) {
-                    location.href = 'result.html?score=' + result.score + '&total=' + result.total;
+                    location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + result.score + '&total=' + result.total;
+                    sessionStorage.setItem('scoreQuestions', result.score);
+                    sessionStorage.setItem('totalQuestions', result.total);
                 }
             } else {
                 location.href = 'index.html';

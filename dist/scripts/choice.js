@@ -29,6 +29,7 @@
                     choiceOptionElement.setAttribute('data-id', quiz.id);
                     choiceOptionElement.onclick = function () {
                         that.choiceQuiz(this)
+                        sessionStorage.setItem('testId', quiz.id);
                     }
 
                     const choiceOptionTextElement = document.createElement('div');

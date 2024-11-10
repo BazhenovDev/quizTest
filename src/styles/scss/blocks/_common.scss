@@ -66,10 +66,7 @@ a {
   }
 }
 
-.button-transparent:hover {
-  background: $accent-btn-color;
-  color: $btn-text-color;
-}
+
 
 .button-transparent {
   background-color: transparent;
@@ -82,10 +79,54 @@ a {
   }
 }
 
+.button-transparent:hover {
+  background: $accent-btn-color;
+  color: $btn-text-color;
+}
+
 
 .footer {
   padding: 40px 0;
   text-align: center;
   color: $footer-text-color;
   font-size: 13px;
+}
+
+.link-arrow {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    text-decoration: none;
+    transition: .2s ease all;
+
+    img {
+      margin-left: 13px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pre-title {
+  font-size: 20px;
+  color: $text-pre-title;
+  line-height: 24px;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+  }
+  &_accent {
+    color: $accent-text-color;
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
