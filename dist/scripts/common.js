@@ -10,6 +10,5 @@ function checkUserData() {
 }
 
 
-
 const currentData = document.querySelector('.footer-date');
 currentData.innerText = new Date().getFullYear();

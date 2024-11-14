@@ -93,6 +93,7 @@
             const chosenOption = this.userResult.find(item => {
                 return item.questionId === activeQuestion.id
             });
+
             activeQuestion.answers.forEach(answer => {
                 const optionElement = document.createElement('div');
                 optionElement.className = 'test__question-option';
@@ -166,7 +167,6 @@
                     chosenAnswerId: chosenAnswerId,
                 });
                 sessionStorage.setItem(`questionAnswer-${activeQuestion.id}`, chosenAnswerId);
-
             }
 
             if (action === 'next' || action === 'pass') {
@@ -191,7 +191,6 @@
                     item.classList.add('complete')
                 }
             });
-
             this.showQuestion();
         },
         complete() {
