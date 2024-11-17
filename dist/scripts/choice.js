@@ -52,9 +52,11 @@
             }
         },
         choiceQuiz(element) {
-            const dataId = element.getAttribute('data-id');
-            if (dataId) {
-                location.href = 'test.html' + location.search + '&id=' + dataId;
+            // const dataId = element.getAttribute('data-id');
+            const testId = sessionStorage.getItem('testId');
+            if (testId) {
+                // location.href = 'test.html' + location.search + '&id=' + dataId;
+                location.href = `test.html?id=${testId}`
             }
         }
     }

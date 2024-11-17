@@ -65,7 +65,9 @@
             const id = sessionStorage.getItem('testId')
             const score = sessionStorage.getItem('scoreQuestions')
             const total = sessionStorage.getItem('totalQuestions')
-            location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + score + '&total=' + total + '&id=' + id;
+            // location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + score + '&total=' + total + '&id=' + id;
+            // location.href = 'result.html?id=' + id + '&score=' + score + '&total=' + total;
+            location.href = `result.html?id=${id}`
         },
         generateAnswers() {
             const wrapper = document.getElementById('answers-wrapper');

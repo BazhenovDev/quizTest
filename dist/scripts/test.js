@@ -11,8 +11,9 @@
         userResult: [],
         init() {
             checkUserData();
-            const url = new URL(location.href)
-            const testId = url.searchParams.get('id');
+            // const url = new URL(location.href)
+            // const testId = url.searchParams.get('id');
+            const testId = sessionStorage.getItem('testId')
             if (testId) {
                 const xhr = new XMLHttpRequest();
                 xhr.open('GET', 'https://testologia.ru/get-quiz?id=' + testId, false);
@@ -38,7 +39,6 @@
             this.nextButtonElement = document.getElementById('next');
             this.nextButtonElement.onclick = this.move.bind(this, 'next');
             this.passButtonElement = document.getElementById('pass');
-            this.passButtonElement.onclick = this.move.bind(this, 'pass');
             this.prevButtonElement = document.getElementById('prev');
             this.prevButtonElement.onclick = this.move.bind(this, 'prev');
             this.progressBarElement = document.getElementById('progress-bar');
@@ -123,10 +123,15 @@
                 this.optionsElement.appendChild(optionElement);
             });
 
+            const arrowImage = document.getElementById('link-arrow-img');
+
             if (chosenOption && chosenOption.chosenAnswerId) {
                 this.nextButtonElement.removeAttribute('disabled');
             } else {
                 this.nextButtonElement.setAttribute('disabled', 'disabled');
+                this.passButtonElement.classList.remove('disabled-link');
+                this.passButtonElement.onclick = this.move.bind(this, 'pass');
+                arrowImage.src = 'dist/images/arrow-question.png'
             }
 
             if (this.currentQuestionIndex === this.quiz.questions.length) {
@@ -143,6 +148,10 @@
         },
         chooseAnswer() {
             this.nextButtonElement.removeAttribute('disabled');
+            this.passButtonElement.classList.add('disabled-link');
+            this.passButtonElement.onclick = null;
+            const arrowImage = document.getElementById('link-arrow-img');
+            arrowImage.src = 'dist/images/arrow-question-grey.png'
         },
         move(action) {
             const activeQuestion = this.quiz.questions[this.currentQuestionIndex - 1]
@@ -194,13 +203,17 @@
             this.showQuestion();
         },
         complete() {
-            const url = new URL(location.href)
-            const id = url.searchParams.get('id');
-            const name = url.searchParams.get('name');
-            const lastName = url.searchParams.get('lastName');
-            const email = url.searchParams.get('email');
+            // const url = new URL(location.href)
+            // const id = url.searchParams.get('id');
+            const id = sessionStorage.getItem('testId');
+            // const name = url.searchParams.get('name');
+            const name = sessionStorage.getItem('name');
+            // const lastName = url.searchParams.get('lastName');
+            const lastName = sessionStorage.getItem('lastName');
+            // const email = url.searchParams.get('email');
+            const email = sessionStorage.getItem('email')
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://testologia.ru/pass-quiz?id=' + id, false);
+            xhr.open('POST', `https://testologia.ru/pass-quiz?id=${id}`, false);
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             xhr.send(JSON.stringify({
                 name: name,
@@ -209,7 +222,6 @@
                 results: this.userResult,
             }));
 
-            const that = this;
             if (xhr.status === 200 && xhr.responseText) {
                 let result = null;
                 try {
@@ -218,7 +230,9 @@
                     location.href = 'index.html';
                 }
                 if (result) {
-                    location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + result.score + '&total=' + result.total;
+                    // location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + result.score + '&total=' + result.total;
+                    // location.href = 'result.html?id=' + id + '&score=' + result.score + '&total=' + result.total;
+                    location.href = `result.html?id=${id}`
                     sessionStorage.setItem('scoreQuestions', result.score);
                     sessionStorage.setItem('totalQuestions', result.total);
                 }

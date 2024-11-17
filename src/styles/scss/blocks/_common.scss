@@ -25,6 +25,7 @@ a {
 
 .title {
   font-family: "Museo Sans Cyrl Bold", sans-serif;
+
   span {
     color: $accent-text-color;
   }
@@ -40,9 +41,6 @@ a {
   line-height: 58px;
 }
 
-.button:hover {
-  background: $accent-btn-hover;
-}
 
 .button {
   padding: 14px 35px;
@@ -54,6 +52,7 @@ a {
   cursor: pointer;
   transition: all .3s ease;
   text-decoration: none;
+
   &:disabled {
     background-color: $disabled-btn;
     cursor: not-allowed;
@@ -66,12 +65,15 @@ a {
   }
 }
 
-
+.button:hover {
+  background: $accent-btn-hover;
+}
 
 .button-transparent {
   background-color: transparent;
   border: 1px solid $accent-btn-color;
   color: $accent-text-color;
+
   &:disabled {
     background-color: transparent;
     border: 1px solid $disabled-btn;
@@ -79,10 +81,11 @@ a {
   }
 }
 
-.button-transparent:hover {
+.button-transparent:not(:disabled):hover {
   background: $accent-btn-color;
   color: $btn-text-color;
 }
+
 
 
 .footer {
@@ -103,6 +106,13 @@ a {
     font-size: 17px;
     text-decoration: none;
     transition: .2s ease all;
+    &.disabled-link {
+      cursor: not-allowed;
+      color: $disabled-link;
+      &:hover {
+        text-decoration: none;
+      }
+    }
 
     img {
       margin-left: 13px;
@@ -124,6 +134,7 @@ a {
     align-items: center;
     column-gap: 15px;
   }
+
   &_accent {
     color: $accent-text-color;
     font-size: 20px;
