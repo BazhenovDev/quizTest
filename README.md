@@ -1,3 +1,5 @@
 Download project
-"npm i" in console for ini
+
+"npm i" in console
+
 "npm start" in console for open server
