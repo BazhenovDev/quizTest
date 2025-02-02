@@ -1,0 +1,169 @@
+@use "../base/variables";
+
+body {
+  font-family: "Museo Sans Cyrl", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: variables.$text-color;
+}
+
+h1 {
+  margin: 0;
+}
+
+
+a {
+  color: variables.$link-text-color;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 40px 0;
+  border-bottom: 1px solid variables.$header-border;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+
+  span {
+    color: variables.$accent-text-color;
+  }
+}
+
+.big-title {
+  font-size: 54px;
+  line-height: 65px;
+}
+
+.common-title {
+  font-size: 48px;
+  line-height: 58px;
+}
+
+
+.button {
+  padding: 14px 35px;
+  border-radius: 6px;
+  background: variables.$accent-btn-color;
+  font-size: 17px;
+  color: variables.$btn-text-color;
+  border: 0;
+  cursor: pointer;
+  transition: all .3s ease;
+  text-decoration: none;
+
+  &:disabled {
+    background-color: variables.$disabled-btn;
+    cursor: not-allowed;
+  }
+}
+
+a {
+  &.button {
+    display: inline-block;
+  }
+}
+
+.button:hover {
+  background: variables.$accent-btn-hover;
+}
+
+.button-transparent {
+  background-color: transparent;
+  border: 1px solid variables.$accent-btn-color;
+  color: variables.$accent-text-color;
+
+  &:disabled {
+    background-color: transparent;
+    border: 1px solid variables.$disabled-btn;
+    color: variables.$disabled-btn;
+  }
+}
+
+.button-transparent:not(:disabled):hover {
+  background: variables.$accent-btn-color;
+  color: variables.$btn-text-color;
+}
+
+
+
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  color: variables.$footer-text-color;
+  font-size: 13px;
+}
+
+.link-arrow {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    text-decoration: none;
+    transition: .2s ease all;
+    &.disabled-link {
+      cursor: not-allowed;
+      color: variables.$disabled-link;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    img {
+      margin-left: 13px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pre-title {
+  font-size: 20px;
+  color: variables.$text-pre-title;
+  line-height: 24px;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+  }
+
+  &_accent {
+    color: variables.$accent-text-color;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.profile {
+ display: flex;
+  align-items: center;
+  &__image {
+    margin-right: 5px;
+  }
+  &__info {
+    &-user {
+      font-size: 18px;
+      line-height: 18px;
+    }
+    &-logout {
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+}

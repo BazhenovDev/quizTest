@@ -1,0 +1,59 @@
+@use "../base/variables";
+
+.answers {
+  padding: 20px 0 20px;
+  &__title {
+    margin-top: 60px;
+  }
+  &__user {
+    margin-top: 10px;
+    font-size: 20px;
+    &-data {
+      color: variables.$accent-text-color;
+
+    }
+  }
+  &__questions {
+    margin-top: 60px;
+    &-title {
+      font-size: 36px;
+    }
+  }
+  &__question {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    &-option {
+      font-size: 20px;
+      &::before {
+        content: "";
+        display: inline-block;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        border: 3px solid variables.$accent-text-color;
+        box-sizing: border-box;
+        position: relative;
+        top: 4px;
+      }
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+      &.try {
+        color: variables.$try-color;
+        &::before {
+          border: 6px solid variables.$try-color;
+        }
+      }
+      &.false {
+        color: variables.$false-color;
+        &::before {
+          border: 6px solid variables.$false-color;
+        }
+      }
+      span {
+        margin-left: 13px;
+      }
+    }
+  }
+}

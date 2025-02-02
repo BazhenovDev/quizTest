@@ -1,0 +1,168 @@
+@use "../base/variables";
+
+.test {
+  padding: 20px 0 50px;
+
+  &__progress-bar {
+    margin-top: 60px;
+    display: flex;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      &-circle {
+        width: 26px;
+        height: 26px;
+        background: variables.$default-circle;
+        border-radius: 50%;
+      }
+
+      &-text {
+        font-size: 13px;
+        margin-top: 10px;
+        line-height: 16px;
+      }
+
+      &:not(:first-child) {
+        margin-left: 130px;
+      }
+
+      &:not(:last-child)::before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        width: 184px;
+        background-color: variables.$default-circle;
+        height: 6px;
+        left: 30px;
+        top: 10px;
+      }
+
+      &.complete {
+        &:not(:last-child)::before {
+          background: variables.$complete;
+        }
+
+        .test {
+          &__progress-bar {
+            &-item {
+              &-circle {
+                background: variables.$complete;
+              }
+            }
+          }
+        }
+      }
+
+      &.active {
+        .test {
+          &__progress-bar {
+            &-item {
+              &-circle {
+                background: variables.$complete;
+              }
+            }
+          }
+        }
+        &::after {
+          content: "";
+          border-radius: 50%;
+          position: absolute;
+          z-index: 1;
+          width: 14px;
+          height: 14px;
+          background: variables.$default-circle;
+          top: 6px;
+        }
+      }
+    }
+  }
+
+  &__question {
+    margin-top: 80px;
+
+    &-title {
+      font-size: 36px;
+      line-height: 43px;
+    }
+
+    &-options {
+      margin-top: 58px;
+      min-height: 344px;
+    }
+
+    &-option {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-time {
+      display: flex;
+      align-items: center;
+    }
+
+    &-text {
+      font-size: 17px;
+      margin-right: 15px;
+      color: variables.$accent-text-color;
+    }
+
+    &-clock {
+      font-size: 10px;
+      background-image: url("/static/images/time-icon.png");
+      background-position: center;
+      background-size: cover;
+      height: 29px;
+      width: 27px;
+      line-height: 31px;
+      text-align: center;
+    }
+  }
+
+  &-btn {
+    min-width: 132px;
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    min-width: 20px;
+    height: 20px;
+    border: 3px solid variables.$border-radio;
+    border-radius: 50%;
+    margin: 0 13px 0 0;
+    transform: translateY(1px);
+    display: grid;
+    place-content: center;
+
+    &::before {
+      content: "";
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      box-shadow: inset 10px 10px variables.$border-radio;
+      transition: transform .2s ease;
+      transform: scale(0);
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+  }
+}

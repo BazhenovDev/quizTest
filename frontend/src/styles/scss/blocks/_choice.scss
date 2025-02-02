@@ -1,0 +1,67 @@
+@use "../base/variables";
+
+.choice {
+  padding: 180px 0 227px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__content {
+    max-width: 583px;
+
+    &-description {
+      margin-top: 40px;
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  &__options {
+    margin-top: 60px;
+  }
+
+  &__option {
+    border: 1px solid variables.$input-border-color;
+    background: #fff;
+    padding: 26px 70px 26px 40px;
+    box-sizing: border-box;
+    width: 583px;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
+    position: relative;
+    transition: all .2s ease;
+
+    &-arrow {
+      position: absolute;
+      right: 40px;
+      top: 26px;
+      display: none;
+    }
+
+    &:hover .choice__option-arrow {
+      display: block;
+    }
+    &:hover {
+      border-left: 5px solid variables.$focus-border-color;
+      color: variables.$accent-text-color;
+      font-family: "Museo Sans Cyrl Bold", sans-serif;
+    }
+    &-result {
+      position: absolute;
+      z-index: 2;
+      right: 18px;
+      top: 16px;
+      border: 1px solid variables.$focus-border-color;
+      padding: 5px;
+      color: variables.$accent-text-color;
+      font-size: 12px;
+      line-height: 14px;
+      background: white;
+      text-align: center;
+    }
+  }
+}
