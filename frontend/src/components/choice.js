@@ -1,39 +1,35 @@
-import {UrlManager} from "../utils/url-manager.js";
 import {CustomHttp} from "../services/custom-http.js";
 import config from "../../config/config.js";
-import {Auth} from "../services/auth";
+import {Auth} from "../services/auth.js";
 
 export class Choice {
     constructor() {
         this.quizzes = [];
-        // this.routeParams = UrlManager.getQueryParams();
-        // UrlManager.checkUserData(this.routeParams);
-        UrlManager.checkUserData();
         this.testResult = null;
-
-        this.init()
+        this.init();
     }
 
     async init() {
         try {
             const result = await CustomHttp.request(config.host + '/tests');
+
             if (result) {
                 if (result.error) {
-                    throw new Error(result.error)
+                    throw new Error(result.message);
                 }
+
                 this.quizzes = result;
             }
         } catch (error) {
             return console.log(error);
         }
-
         const userInfo = Auth.getUserInfo();
         if (userInfo) {
             try {
                 const result = await CustomHttp.request(config.host + '/tests/results?userId=' + userInfo.userId);
                 if (result) {
                     if (result.error) {
-                        throw new Error(result.error)
+                        throw new Error(result.message);
                     }
                     this.testResult = result;
                 }
@@ -45,20 +41,20 @@ export class Choice {
         this.processQuizzes();
     }
 
-
     processQuizzes() {
-        const choiceOptions = document.getElementById('choiceOptions');
+        const choiceOptionsElement = document.getElementById('choiceOptions');
+
         if (this.quizzes && this.quizzes.length > 0) {
             this.quizzes.forEach(quiz => {
                 const that = this;
+
                 const choiceOptionElement = document.createElement('div');
                 choiceOptionElement.className = 'choice__option';
                 choiceOptionElement.setAttribute('data-id', quiz.id);
                 choiceOptionElement.onclick = function () {
-                    that.choiceQuiz(this)
+                    that.choiceQuiz(this);
                     sessionStorage.setItem('testId', quiz.id);
                 }
-
 
                 const choiceOptionTextElement = document.createElement('div');
                 choiceOptionTextElement.className = 'choice__option-text';
@@ -67,7 +63,7 @@ export class Choice {
                 const choiceOptionArrowElement = document.createElement('div');
                 choiceOptionArrowElement.className = 'choice__option-arrow';
 
-                const result = this.testResult.find(item => item.testId === quiz.id)
+                const result = this.testResult.find(item => item.testId === quiz.id);
                 if (result) {
                     const choiceOptionResultElement = document.createElement('div');
                     choiceOptionResultElement.className = 'choice__option-result';
@@ -83,19 +79,14 @@ export class Choice {
                 choiceOptionArrowElement.appendChild(choiceOptionImageElement);
                 choiceOptionElement.appendChild(choiceOptionTextElement);
                 choiceOptionElement.appendChild(choiceOptionArrowElement);
-                choiceOptions.appendChild(choiceOptionElement);
+                choiceOptionsElement.appendChild(choiceOptionElement);
             });
         }
     }
-
-    // choiceQuiz(element) {
     choiceQuiz() {
-        // const dataId = element.getAttribute('data-id');
         const testId = sessionStorage.getItem('testId');
         if (testId) {
-            // location.href = 'test.html' + location.search + '&id=' + dataId;
-            // location.href = `#/test?id=${testId}`
-            location.href = `#/test`
+            location.href = `#/test?id=${testId}`
         }
     }
 }

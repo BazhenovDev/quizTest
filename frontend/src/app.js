@@ -3,12 +3,13 @@ import {Router} from "./router.js";
 class App {
     constructor() {
         this.router = new Router();
-        window.addEventListener('DOMContentLoaded', this.handleRouteCHanging.bind(this));
-        window.addEventListener('popstate', this.handleRouteCHanging.bind(this));
+        window.addEventListener('DOMContentLoaded', this.handleRouteChanging.bind(this));
+        window.addEventListener('popstate', this.handleRouteChanging.bind(this));
     }
-    handleRouteCHanging() {
+    handleRouteChanging() {
         this.router.openRoute();
     }
 }
 
 (new App());
+

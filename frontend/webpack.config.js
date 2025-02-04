@@ -1,5 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
         // пересобирается папка dist (удаляется и заново устанавливается)
-        // clean: true,
+        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -18,9 +18,8 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {from: "templates", to: "templates"},
-                // {from: "static/fonts", to: "fonts"},
-                // {from: "static/images", to: "images"},
-                // {from: "styles", to: "styles"},
+                {from: "styles/css", to: "styles"},
+                {from: "static", to: "static"},
             ],
         }),
     ],

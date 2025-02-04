@@ -18,16 +18,16 @@ export class Router {
             {
                 route: '#/',
                 title: 'Главная АйтилогияQuiz',
-                template: '/templates/index.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/index.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                 },
             },
             {
                 route: '#/signup',
                 title: 'Регистрация',
-                template: '/templates/signup.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/signup.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Form('signup');
                 },
@@ -35,8 +35,8 @@ export class Router {
             {
                 route: '#/login',
                 title: 'Вход в систему',
-                template: '/templates/login.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/login.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Form('login');
                 },
@@ -44,8 +44,8 @@ export class Router {
             {
                 route: '#/choice',
                 title: 'Выбор теста',
-                template: '/templates/choice.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/choice.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Choice();
                 },
@@ -53,8 +53,8 @@ export class Router {
             {
                 route: '#/test',
                 title: 'Прохождение теста',
-                template: '/templates/test.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/test.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Test();
                 },
@@ -62,8 +62,8 @@ export class Router {
             {
                 route: '#/result',
                 title: 'Результат теста',
-                template: '/templates/result.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/result.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Result();
                 },
@@ -71,8 +71,8 @@ export class Router {
             {
                 route: '#/answers',
                 title: 'Результат теста',
-                template: '/templates/answers.html',
-                styles: '/styles/style.min.css',
+                template: 'templates/answers.html',
+                styles: 'styles/style.min.css',
                 load: () => {
                     new Answers();
                 },
@@ -91,6 +91,7 @@ export class Router {
 
         const newRoute = this.routes.find(item => {
             return item.route === urlRoute;
+            // return item.route === window.location.hash;
         });
 
         if (!newRoute) {

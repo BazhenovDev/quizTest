@@ -3,7 +3,6 @@ import {Auth} from "../services/auth.js";
 import config from "../../config/config.js";
 
 export class Form {
-
     constructor(page) {
         this.agreeElement = null;
         this.processElement = null;
@@ -60,17 +59,16 @@ export class Form {
             }
         });
 
+        this.processElement = document.getElementById('process')
+        this.processElement.onclick = function () {
+            that.processForm();
+        }
+
         if (this.page === 'signup') {
             this.agreeElement = document.getElementById('agree');
             this.agreeElement.onchange = function () {
                 that.validateForm();
             }
-        }
-
-
-        this.processElement = document.getElementById('process')
-        this.processElement.onclick = function () {
-            that.processForm()
         }
     }
 
@@ -134,6 +132,7 @@ export class Form {
                     Auth.setUserInfo({
                         fullName: result.fullName,
                         userId: result.userId,
+                        email: email,
                     })
                     location.href = '#/choice'
                 }

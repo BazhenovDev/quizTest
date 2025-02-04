@@ -15,9 +15,6 @@ export class Test {
         this.progressBarElement = null;
         this.currentQuestionIndex = 1;
         this.userResult = [];
-        // UrlManager.checkUserData();
-        // const url = new URL(location.href)
-        // const testId = url.searchParams.get('id');
         this.testId = sessionStorage.getItem('testId');
         this.init();
     }
@@ -34,7 +31,7 @@ export class Test {
                     this.startQuiz();
                 }
             } catch (error) {
-                console.log(error);
+                return console.log(error);
             }
         }
     }
@@ -56,9 +53,8 @@ export class Test {
 
         const timerElement = document.getElementById('timer');
         let seconds = 59;
-        timerElement.innerText = seconds;
        this.interval = setInterval(function () {
-            seconds--
+            seconds--;
             timerElement.innerText = seconds;
             if (seconds === 0) {
                 clearInterval(this.interval);
@@ -70,7 +66,6 @@ export class Test {
 
     prepareProgressBar() {
         for (let i = 0; i < this.quiz.questions.length; i++) {
-
             const itemElement = document.createElement('div');
             itemElement.className = 'test__progress-bar-item ' + (i === 0 ? 'active' : '');
 
@@ -86,12 +81,11 @@ export class Test {
 
             this.progressBarElement.appendChild(itemElement);
         }
-    }
+    };
 
     showQuestion() {
         const activeQuestion = this.quiz.questions[this.currentQuestionIndex - 1];
         this.questionTitleElement.innerHTML = `<span> Вопрос ${this.currentQuestionIndex}:</span> ${activeQuestion.question}`;
-
         this.optionsElement.innerHTML = '';
 
         const that = this;
@@ -106,11 +100,12 @@ export class Test {
 
             const inputId = `answer-${answer.id}`
             const inputElement = document.createElement('input');
+            inputElement.className = 'option-answer';
             inputElement.setAttribute('id', inputId);
             inputElement.setAttribute('type', 'radio');
             inputElement.setAttribute('name', 'answer');
             inputElement.setAttribute('value', answer.id);
-            inputElement.className = 'option-answer'
+
 
             if (chosenOption && chosenOption.chosenAnswerId === answer.id) {
                 inputElement.setAttribute('checked', 'checked');
@@ -203,7 +198,7 @@ export class Test {
             item.classList.remove('complete');
             item.classList.remove('active');
 
-            if (this.currentQuestionIndex === currentItemIndex) {
+            if (currentItemIndex === this.currentQuestionIndex) {
                 item.classList.add('active');
             } else if (currentItemIndex < this.currentQuestionIndex) {
                 item.classList.add('complete')
@@ -232,35 +227,5 @@ export class Test {
         } catch (e) {
             console.log(e)
         }
-
-        // const url = new URL(location.href)
-        // const id = url.searchParams.get('id');
-        // const name = url.searchParams.get('name');
-        // const name = sessionStorage.getItem('name');
-        // const lastName = url.searchParams.get('lastName');
-        // const lastName = sessionStorage.getItem('lastName');
-        // const email = url.searchParams.get('email');
-        // const email = sessionStorage.getItem('email')
-
-        // if (xhr.status === 200 && xhr.responseText) {
-        //     let result = null;
-        //     try {
-        //         result = JSON.parse(xhr.responseText);
-        //     } catch (e) {
-        //         location.href = '#/';
-        //     }
-        //     if (result) {
-        //         // location.href = 'result.html?name=' + name + '&lastName=' + lastName + '&email=' + email + '&id=' + id + '&score=' + result.score + '&total=' + result.total;
-        //         // location.href = 'result.html?id=' + id + '&score=' + result.score + '&total=' + result.total;
-        //         // location.href = `result.html?id=${id}`
-        //         // location.href = `#/result?id=${id}`
-        //
-        //         sessionStorage.setItem('scoreQuestions', result.score);
-        //         sessionStorage.setItem('totalQuestions', result.total);
-        //         location.href = `#/result`;
-        //     }
-        // } else {
-        //     location.href = '#/';
-        // }
     }
 }

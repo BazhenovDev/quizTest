@@ -32,11 +32,6 @@ export class Auth {
         return false;
     }
 
-    static setTokens(accessToken, refreshToken) {
-        localStorage.setItem(this.accessTokenKey, accessToken);
-        localStorage.setItem(this.refreshTokenKey, refreshToken);
-    }
-
     static async logout() {
         const refreshToken = localStorage.getItem(this.refreshTokenKey);
         if (refreshToken) {
@@ -58,6 +53,11 @@ export class Auth {
                 }
             }
         }
+    }
+
+    static setTokens(accessToken, refreshToken) {
+        localStorage.setItem(this.accessTokenKey, accessToken);
+        localStorage.setItem(this.refreshTokenKey, refreshToken);
     }
 
     static removeTokens() {
